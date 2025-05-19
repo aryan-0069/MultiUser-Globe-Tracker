@@ -1,40 +1,41 @@
-🌍 MultiUser Globe Tracker
-MultiUser Globe Tracker is an interactive web application where multiple users (such as family members or friends) can mark countries on a shared world map. Each user is given a distinct color, and their selected countries appear on the map in that color — making it perfect for tracking global travel together!
+# 🌍 MultiUser Globe Tracker
 
-🚀 Features
-🧑‍🤝‍🧑 Add multiple users with names and colors
+**MultiUser Globe Tracker** is a collaborative world map application where multiple users (e.g., family or friends) can mark the countries they've visited. Each user is assigned a unique color, and their selected countries are highlighted accordingly on an interactive SVG world map.
 
-🗺️ Interactive SVG world map for selecting countries
+This project combines a dynamic frontend with a PostgreSQL-powered backend to store and update user selections in real time.
 
-🎨 Color-coded country tracking per user
+---
 
-💾 PostgreSQL database to store users and their selected countries
+## ✨ Features
 
-🔁 Full Create, Read, and Update functionality for map data
+- 👥 Add multiple users with custom names and colors
+- 🗺️ Interactive world map for country selection
+- 🎨 Each user’s selected countries are colored uniquely
+- 💾 Persistent data storage using PostgreSQL
+- ✅ Supports **Create**, **Read**, and **Update** operations
 
-🛠️ Tech Stack
-Frontend:
+---
 
-HTML, CSS, JavaScript
+## 🛠 Tech Stack
 
-EJS templates
+### Frontend
+- HTML, CSS, JavaScript
+- EJS (Embedded JavaScript Templates)
+- SVG for world map rendering
 
-SVG for the interactive world map
+### Backend
+- Node.js
+- Express.js
 
-Backend:
+### Database
+- PostgreSQL
+- `pg` Node.js package for querying
 
-Node.js
+---
 
-Express.js
+## 📁 Folder Structure
 
-Database:
-
-PostgreSQL using pg Node.js package
-
-📂 Project Structure
-pgsql
-Copy
-Edit
+```plaintext
 MultiUser-Globe-Tracker/
 ├── public/
 │   └── styles/
@@ -44,57 +45,59 @@ MultiUser-Globe-Tracker/
 │   └── partials/
 │       └── header.ejs
 ├── db/
-│   └── connection.js       # PostgreSQL connection setup
-├── index.js                # Main Express server
+│   └── connection.js        # PostgreSQL DB config
+├── index.js                 # Express server
 ├── package.json
 └── README.md
-🧑‍💻 Getting Started
-Prerequisites
-Node.js
 
-PostgreSQL
+setup_instructions:
+  prerequisites:
+    - Node.js installed
+    - PostgreSQL installed and running
 
-Installation
-Clone the repository:
-git clone https://github.com/aryan-0069/MultiUser-Globe-Tracker.git
-cd MultiUser-Globe-Tracker
-Install dependencies:
+  steps:
+    - step: "Clone the Repository"
+      commands:
+        - git clone https://github.com/aryan-0069/MultiUser-Globe-Tracker.git
+        - cd MultiUser-Globe-Tracker
 
-bash:
-npm install
+    - step: "Install Dependencies"
+      commands:
+        - npm install
 
-Set up PostgreSQL database:
+    - step: "Setup PostgreSQL Database"
+      instructions:
+        - Create a database, e.g., 'family_tracker'
+        - Run the following SQL schema:
+          |
+          CREATE TABLE users (
+            id SERIAL PRIMARY KEY,
+            name TEXT NOT NULL,
+            color TEXT NOT NULL
+          );
 
-Create a database (e.g. family_tracker)
+          CREATE TABLE country_selections (
+            id SERIAL PRIMARY KEY,
+            user_id INTEGER REFERENCES users(id),
+            country_code TEXT NOT NULL
+          );
 
-Run this schema:
+    - step: "Configure Database Credentials"
+      instructions:
+        - Edit 'db/connection.js' with your PostgreSQL configuration:
+          |
+          const pool = new Pool({
+            user: 'your_username',
+            host: 'localhost',
+            database: 'family_tracker',
+            password: 'your_password',
+            port: 5432,
+          });
 
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  color TEXT NOT NULL
-);
+    - step: "Start the Server"
+      commands:
+        - node index.js
 
-CREATE TABLE country_selections (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  country_code TEXT NOT NULL
-);
-Configure database credentials:
-
-Open db/connection.js
-
-Replace the hardcoded config with your PostgreSQL credentials, for example:
-
-const pool = new Pool({
-  user: 'your_pg_user',
-  host: 'localhost',
-  database: 'family_tracker',
-  password: 'your_pg_password',
-  port: 5432,
-});
-Run the app:
-bash : node index.js
-Open in browser:
-Visit http://localhost:3000
-
+    - step: "Open the App"
+      instructions:
+        - Visit: http://localhost:3000
