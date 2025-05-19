@@ -66,13 +66,13 @@ git clone https://github.com/aryan-0069/MultiUser-Globe-Tracker.git
 cd MultiUser-Globe-Tracker
 ```
 
-###2. Install Dependencies
+### 2. Install Dependencies
 ```bash
 
 npm install
 ```
 
-###3. Setup PostgreSQL Database
+### 3. Setup PostgreSQL Database
 Create a database, e.g., family_tracker
 
 Run the following SQL schema:
@@ -90,7 +90,7 @@ CREATE TABLE country_selections (
 );
 
 
-###4. Configure Database Credentials
+### 4. Configure Database Credentials
 Edit db/connection.js and update it with your PostgreSQL configuration:
 
 const pool = new Pool({
@@ -102,12 +102,12 @@ const pool = new Pool({
 });
 
 
-###5. Start the Server
+### 5. Start the Server
 ```bash
 node index.js
 ```
 
-###6. Open the App
+### 6. Open the App
 ```bash
 Visit: http://localhost:3000
 ```
